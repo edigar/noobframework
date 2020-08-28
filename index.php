@@ -1,7 +1,10 @@
 <?php
 
-$config = include_once 'config/config.php';
-$db = isset($config['db']) ? $config['db'] : null;
+if (file_exists('config/config.php')) {
+    $config = include_once 'config/config.php';
+    $db = isset($config['db']) ? $config['db'] : null;
+} else $db = null;
+
 require('load.php');
 
 $_GET['key'] = (isset($_GET['key']) ? $_GET['key'].'/' : 'index/');
