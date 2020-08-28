@@ -1,6 +1,7 @@
 <?php
 
-$db = require('config/config.php')['db'];
+$config = require('config/config.php');
+$db = isset($config['db']) ? $config['db'] : null;
 require('load.php');
 
 $_GET['key'] = (isset($_GET['key']) ? $_GET['key'].'/' : 'index/');
