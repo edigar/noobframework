@@ -36,10 +36,12 @@ class DataBase {
     public function getList($table, $fields, $condition = null, $filter = null, $order = null, $limit = null) {
         $query = "SELECT $fields FROM $table";
 
-        foreach($condition as $column => $value) {
-            $conditions[] = "$column = $value";
+        if($condition != null) {
+            foreach($condition as $column => $value) {
+                $conditions[] = "$column = $value";
+            }
+            $conditions = implode(' AND ', $conditions);    
         }
-        $conditions = implode(' AND ', $conditions);
 
         if(!empty($condition)) {
             $query .= " WHERE $conditions";
