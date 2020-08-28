@@ -1,6 +1,6 @@
 <?php
 
-$config = require('config/config.php');
+$config = include_once 'config/config.php';
 $db = isset($config['db']) ? $config['db'] : null;
 require('load.php');
 
