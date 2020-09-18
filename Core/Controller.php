@@ -21,6 +21,8 @@ class Controller {
             $extName = '.phtml';
         } else if (file_exists('App/views/' . $name . '.php')) {
             $extName = '.php';
+        } else {
+            throw new Exception('Only .html, .phtml and .php view files are supported.');
         }
 
         return require_once('App/views/' . $name . $extName);
