@@ -5,15 +5,23 @@ namespace Core;
 class Controller {
     
     protected function view($name, $params = null) {
-        $varName = $name;
-        $$varName = $params;
-        $ext = ['.html', '.php', '.phtml'];
-        foreach($ext as $value) {
-            $way = 'App/views/'.$name.$value;
-            if(file_exists($way)) {
-                return require_once($way);
+
+        if ($params) {
+            $arrKeys = array_keys($params);
+    
+            foreach($arrKeys as $value) {
+                $$value = $params[$value];
             }
         }
-        trigger_error("supported files are HTML, PHP and PHTML");
+
+        $extensionsAllowed = ['.html', '.php', '.phtml'];
+        foreach($extensionsAllowed as $extension) {
+            $view = 'App/views/' . $name . $extension;
+            if(file_exists($view)) {
+                return require_once($view);
+            }
+        }
+
+        throw new Exception('view not found');
     }
 }
