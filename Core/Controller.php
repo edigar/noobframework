@@ -5,7 +5,6 @@ namespace Core;
 class Controller {
     
     protected function view($name, $params = null) {
-        $extName = '.html';
 
         if ($params) {
             $arrKeys = array_keys($params);
@@ -15,16 +14,14 @@ class Controller {
             }
         }
 
-        if (file_exists('App/views/' . $name . '.html')) {
-            $extName = '.html';
-        } else if (file_exists('App/views/' . $name . '.phtml')) {
-            $extName = '.phtml';
-        } else if (file_exists('App/views/' . $name . '.php')) {
-            $extName = '.php';
-        } else {
-            throw new Exception('view not found');
+        $extensionsAllowed = ['.html', '.php', '.phtml'];
+        foreach($extensionsAllowed as $extension) {
+            $view = 'App/views/' . $name . $extension;
+            if(file_exists($view)) {
+                return require_once($view);
+            }
         }
 
-        return require_once('App/views/' . $name . $extName);
+        throw new Exception('view not found');
     }
 }
