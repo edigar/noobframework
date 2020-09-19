@@ -22,7 +22,7 @@ class Controller {
         } else if (file_exists('App/views/' . $name . '.php')) {
             $extName = '.php';
         } else {
-            throw new Exception('Only .html, .phtml and .php view files are supported.');
+            throw new Exception('view not found');
         }
 
         return require_once('App/views/' . $name . $extName);
