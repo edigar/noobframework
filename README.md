@@ -17,7 +17,7 @@
 <br>
 
 <p align="center">
-  <img alt="noob" src="Readme/logo-2.png">
+  <img alt="noob" src="https://lh3.googleusercontent.com/proxy/vcL4yovEKslCocWVWMwvYF2ME9OFvG7jq98q6OB1jlP5T2VZZyBGGpejKsLYF8NLaIpJn1tWKzjshy0GjiW55ZAzjCm4uSu6AyfNVUCgP3WhHhY8a30u88kaBXqPwpqw7UM">
 </p>
 
 ## Tecnologias
