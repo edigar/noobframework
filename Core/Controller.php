@@ -22,6 +22,6 @@ class Controller {
             }
         }
 
-        throw new Exception('view not found');
+        throw new \Exception('view not found');
     }
 }
