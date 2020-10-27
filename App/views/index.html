@@ -1,14 +1,153 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-  <head>
-    <meta http-equiv="content-type" content="text/html;charset=utf-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1, shrink-to-fit=no"
-    />
-    <title>Noob Framework</title>
-  </head>
-  <body>
-   
-  </body>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./main.css">
+    <title>Noobframework</title>
+    <style>
+        * {
+    outline: 0;
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: sans-serif;
+}
+
+.container {
+    width: 100%;
+    height: 100vh;
+
+    background-color: #ecf0f1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.box-master {
+    display: flex;
+    border-radius: 5px;
+
+    padding: 50px;
+    width: 90%;
+    height: 500px;
+}
+
+.welcome-box {
+    width: 40%;
+    padding: 30px;
+    background-color: #58af9c;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.welcome-box main {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.welcome-box h1 {
+    color: #fff;
+}
+
+.welcome-box p {
+    color: #fff;
+    margin: 32px;
+    text-align: center;
+}
+
+.welcome-box button {
+    border: 2px solid #fff;
+    background: none;
+    height: 40px;
+    width: 136px;
+    border-radius: 20px;
+    font-size: 14px;
+    color: #fff;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.4s;
+}
+
+.welcome-box button:hover {
+    background-color: #fff;
+    color: #58af9c;
+}
+
+.form-box {
+    width: 60%;
+
+    background-color: #fff;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.form-box form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.form-box h1 {
+    color: #58af9c;
+}
+
+.form-box input {
+    background-color: #ecf0f1;
+    border: none;
+    height: 50px;
+    width: 350px;
+    margin: 8px;
+    padding: 20px;
+}
+
+.form-box button {
+    border: none;
+    background: #58af9c;
+    height: 40px;
+    width: 136px;
+    border-radius: 20px;
+    font-size: 14px;
+    color: #fff;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.6s;
+}
+
+.form-box button:hover {
+    background: none;
+    color: #58af9c;
+    border: 2px solid #58af9c;
+}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="box-master">
+            <div class="welcome-box">
+                <main>
+                    <h1>Bem-vindo</h1>
+                    <p>Para se manter conectado, entre com sua conta.</p>
+                    <button>Entrar</button>
+                </main>
+            </div>
+    
+            <div class="form-box">
+                <h1>Criar conta</h1>
+                <form action="">
+                    <input type="text" placeholder="Nome" required>
+                    <input type="email" name="email" id="email" placeholder="exemplo@email.com" required>
+                    <input type="password" name="password" id="password" placeholder="senha" required>
+                    <button type="submit">Criar conta</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
 </html>
