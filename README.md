@@ -1,10 +1,10 @@
 # noobframework
 
-A MVC framework with automated [friendly URL](techterms.com/definition/friendly_url) in PHP for beginners. Aimed at anyone learning the [MVC design pattern](pt.wikipedia.org/wiki/MVC) in [PHP](php.net).
+A MVC framework with automated [friendly URL](https://techterms.com/definition/friendly_url) in PHP for beginners. Aimed at anyone learning the [MVC design pattern](https://pt.wikipedia.org/wiki/MVC) in [PHP](https://www.php.net/).
 
 ## MVC
 
-Acronym for [Model-View-Controller](en.wikipedia.org/wiki/Model-view-controller), it is a software design standard, whose basic principle is the division of the application into three layers: the user interaction layer (view), the data manipulation layer (model) and the layer controller.
+Acronym for [Model-View-Controller](https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93controller), it is a software design standard, whose basic principle is the division of the application into three layers: the user interaction layer (view), the data manipulation layer (model) and the layer controller.
 
 A quick explanation of each layer:
 
@@ -25,7 +25,7 @@ Just clone or download this repository. :)
 
 ### Docker
 
-If you use [docker](www.docker.com), at the root of the project there is a Dockerfile file with the minimum requirements to run the project.
+If you use [docker](https://www.docker.com/), at the root of the project there is a Dockerfile file with the minimum requirements to run the project.
 
 You can run with docker by building the image and running it.
 
@@ -50,4 +50,4 @@ Each controller can have many actions (access methods).
 
 Your application must respond to the url [your-project]/[controller-name]/[action-name]. If your action is called index, there is no need to type in the url.
 
-For more, see [documentation](edigar.github.io/noobframework).
+For more, see [documentation](https://edigar.github.io/noobframework).
