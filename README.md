@@ -38,12 +38,16 @@ docker run -d --name noobframework -p 80:80 -v $(pwd):/var/www/html noobframewor
 
 ## How to use
 
-Your code will be in the App folder, which is divided into Controller, model and view.
+Your code will be in the App folder, which is divided into Controllers, Models and views folders.
 
 In the config folder you can add your application's settings, such as database and base url. Rename config.php.dist to config.php.
 
-In order to create a controller, inside App/Controller, creates a file, with a name ending with Controller, as the existing controller (indexController.php). For example, if you want to create the controller user, create the file userController.php. In this example, the route [your-project]/user comes into existence.
+In order to create a controller, inside App/Controller, creates a file, with a name ending with Controller, like already existing controller (indexController.php). For example, if you want to create the user controller, create the file userController.php. In this example, the route [your-project]/user comes into existence.
 
 Follow this rule to create a model, inside model folder and to create a view, follow the example that already exists in the view folder.
 
+Each controller can have many actions (access methods).
+
 Your application must respond to the url [your-project]/[controller-name]/[action-name]. If your action is called index, there is no need to type in the url.
+
+For more, see [documentation](edigar.github.io/noobframework).
