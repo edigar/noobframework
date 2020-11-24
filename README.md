@@ -38,7 +38,7 @@ docker run -d --name noobframework -p 80:80 -v $(pwd):/var/www/html noobframewor
 
 ## How to use
 
-Your code will be in the App folder, which is divided into Controllers, Models and views folders.
+Develop your app inside the App folder, which is divided into Controllers, Models and views folders, and the public folder will be your public-facing document root.
 
 In the config folder you can add your application's settings, such as database and base url. Rename config.php.dist to config.php.
 
