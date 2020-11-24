@@ -3,20 +3,15 @@
 namespace Core;
 
 class Controller {
-    
-    private $config = [];
 
-    public function __construct () {
+    protected function getConfig($item = null) {
         global $config;
-        $this->config = $config;
-    }
 
-    protected function getConfig($config = null) {
-        if($config != null) {
-            return $this->config[$config];
+        if($item != null) {
+            return $config[$item];
         }
 
-        return $this->config;
+        return $config;
     }
     
     protected function view($name, $params = null) {

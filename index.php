@@ -2,8 +2,7 @@
 
 if (file_exists('config/config.php')) {
     $config = include_once 'config/config.php';
-    $db = isset($config['db']) ? $config['db'] : null;
-} else $db = null;
+} else $config = [];
 
 require('load.php');
 

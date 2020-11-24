@@ -18,7 +18,8 @@ class DataBase {
     }
 
     private function connect() {
-        global $db;
+        global $config;
+        $db = isset($config['db']) ? $config['db'] : null;
         $this->connection = new PDO("{$db['driver']}:host={$db['host']};dbname={$db['dbname']};charset=utf8", $db['user'], $db['pass'], array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"));
         $this->connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     }
