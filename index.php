@@ -1,8 +1,6 @@
 <?php
 
-if (file_exists('config/config.php')) {
-    $config = include_once 'config/config.php';
-} else $config = [];
+$config = file_exists('config/config.php') ? include_once 'config/config.php' : [];
 
 require('load.php');
 
