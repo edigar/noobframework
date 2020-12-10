@@ -14,9 +14,9 @@ A quick explanation of each layer:
 
 ![MVC](https://upload.wikimedia.org/wikipedia/commons/a/a0/MVC-Process.svg)
 
-## Minimum requiriments
+## Requiriments
 
-* PHP 5.6
+* PHP >= 5.6
 * apache with Rewrite mode enabled
 
 ## Installation

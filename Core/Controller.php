@@ -36,10 +36,12 @@ class Controller {
     }
 
     protected function redirect($url, $statusCode = null) {
+        $urlBase = $this->getConfig('urlBase') == null ? "" : $this->getConfig('urlBase') . "/";
+
         if($statusCode == null) {
-            header('Location: ' . $url);
+            header('Location: ' . $urlBase . $url);
         } else {
-            header('Location: ' . $url, true, $statusCode);
+            header('Location: ' . $urlBase . $url, true, $statusCode);
         }
         
         die();
