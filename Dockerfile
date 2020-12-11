@@ -1,4 +1,4 @@
-FROM php:5.6-apache
+FROM php:7.4-apache
 LABEL maintainer 'Edigar Herculano <edigarhdev@gmail.com>'
 
 COPY ./ /var/www/html
