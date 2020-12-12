@@ -4,7 +4,7 @@ namespace Core;
 
 class Controller {
 
-    protected function getConfig($item = null) {
+    protected function getConfig(string $item = null): array {
         global $config;
 
         if($item != null) {
@@ -14,8 +14,7 @@ class Controller {
         return $config;
     }
     
-    protected function view($name, $params = null) {
-
+    protected function view(string $name, array $params = null): string {
         if ($params) {
             $arrKeys = array_keys($params);
     
@@ -35,7 +34,7 @@ class Controller {
         throw new \Exception('view not found');
     }
 
-    protected function redirect($url, $statusCode = null) {
+    protected function redirect(string $url, int $statusCode = null): void {
         $urlBase = $this->getConfig('urlBase') == null ? "" : $this->getConfig('urlBase') . "/";
 
         if($statusCode == null) {

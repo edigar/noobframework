@@ -9,7 +9,7 @@ class DataBase {
     private static $instance;
     private $connection;
 
-    public static function getInstance() {
+    public static function getInstance(): DataBase {
         if(!self::$instance) {
             self::$instance = new DataBase();
             self::$instance->connect();
@@ -17,24 +17,23 @@ class DataBase {
         return self::$instance;
     }
 
-    private function connect() {
+    private function connect(): void {
         global $config;
         $db = isset($config['db']) ? $config['db'] : null;
         $this->connection = new PDO("{$db['driver']}:host={$db['host']};dbname={$db['dbname']};charset=utf8", $db['user'], $db['pass'], [PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"]);
         $this->connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     }
 
-    private function dispatch($sql, $data = null) {
+    private function dispatch(string $sql, array $data = null): ?array {
         $statement = $this->connection->prepare($sql);
         $statement->execute($data);
 
         if(explode(" ", $sql)[0] == 'SELECT') {
-            $teste = $statement->fetchAll(PDO::FETCH_ASSOC);
-            return $teste;
+            return $statement->fetchAll(PDO::FETCH_ASSOC);
         }
     }
 
-    public function getList($table, $fields, $condition = null, $filter = null, $order = null, $limit = null) {
+    public function getList(string $table, string $fields, array $condition = null, string $filter = null, string $order = null, string $limit = null): ?array {
         $query = "SELECT $fields FROM $table";
 
         if($condition != null) {
@@ -59,7 +58,7 @@ class DataBase {
         return $this->dispatch($query);
     }
 
-    public function insert($table, $data) {
+    public function insert(string $table, array $data): bool {
         foreach($data as $column => $value) {
             $columns[] = $column;
             $holders[] = "?";
@@ -76,7 +75,7 @@ class DataBase {
         return true;
     }
 
-    public function update($table, $data, $condition) {
+    public function update(string $table, array $data, array $condition): bool {
         foreach($data as $column => $value) {
             $updatesColumns[] = "$column = :$column";
             $updateValues[":$column"] = $value;
@@ -97,7 +96,7 @@ class DataBase {
         return true;
     }
 
-    public function delete($table, $condition) {
+    public function delete(string $table, array $condition): bool {
         foreach($condition as $column => $value) {
             $conditions[] = "$column = $value";
         }

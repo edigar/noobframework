@@ -4,7 +4,7 @@ $config = file_exists('config/config.php') ? include_once 'config/config.php' : 
 
 require('load.php');
 
-$_GET['key'] = (isset($_GET['key']) ? $_GET['key'].'/' : 'index/');
+$_GET['key'] = (isset($_GET['key']) ? $_GET['key'] . '/' : 'index/');
 $key = $_GET['key'];
 $separator = explode('/', $key);
 $controller = '\App\Controllers\\' . $separator[0] . "Controller";
