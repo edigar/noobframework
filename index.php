@@ -17,5 +17,8 @@ if($_SERVER['REQUEST_METHOD'] == 'POST' && !empty($_POST)) {
     $param = $param == null ? $_POST : [$param, $_POST];
 }
 
+if(!method_exists($app, $action)) loadNotFound();
+spl_autoload_unregister('loadNotFound');
+
 if($param == null) $app->$action();
 else $app->$action($param);
