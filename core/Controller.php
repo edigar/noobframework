@@ -7,7 +7,7 @@ class Controller {
     /**
      * Get configs (one or all) on cofig/cofig.php
      * 
-     * @param string $item config index wanted (optional)
+     * @param string $item Config index wanted (optional)
      * 
      * @return mixed Value of config
      */
@@ -24,8 +24,8 @@ class Controller {
     /**
      * Load view
      * 
-     * @param string    $name   view name
-     * @param array     $params params for view (optional)
+     * @param string    $name   View name
+     * @param array     $params Params for view (optional)
      * 
      * @return string view
      */

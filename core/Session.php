@@ -8,8 +8,7 @@ class Session {
     private $session_expire_time = null ;
 
     /**
-     * @access public
-     * @param int - tempo máximo para expiração da sessão
+     * @param int|null $expire_time Tempo máximo para expiração da sessão
      */
     public function __construct(int $expire_time = null) {
         self::$instance = &$this;
@@ -33,17 +32,36 @@ class Session {
         $_SESSION['SS_ULTIMA_ATIVIDADE'] = time();
     }
 
+    /**
+     * Get an instance of Session (Singleton)
+     * 
+     * @param int|null $expire_time Session expire time
+     * 
+     * @return self
+     */
     public static function getInstance(int $expire_time = null ): Session {
         if(!isset(self::$instance)) self::$instance = new self($expire_time);
 
         return self::$instance;
     }
 
+    /**
+     * Set session expire time
+     * 
+     * @param int|null $__value Expire time
+     * 
+     * @return void
+     */
     public function setExpiretime(int $__value = null): void {
         if($__value != null)
             $this->session_expire_time = $__value;
     }
 
+    /**
+     * Get session expire time
+     * 
+     * @return int
+     */
     public function getExpiretime(): int {
         return $this->session_expire_time ;
     }
@@ -68,10 +86,22 @@ class Session {
             return null;
     }
 
+    /**
+     * Remove a session item (variable)
+     * 
+     * @param string $name item name
+     * 
+     * @return void
+     */
     public function del(string $name): void {
         unset($_SESSION[trim($name)]);
     }
 
+    /**
+     * Destroy the session
+     * 
+     * @return void
+     */
     function destroy(): void {
         $_SESSION = array();
         session_destroy();
