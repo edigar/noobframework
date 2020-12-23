@@ -9,6 +9,11 @@ class DataBase {
     private static $instance;
     private $connection;
 
+    /**
+     * Get an instance of DataBase (Singleton)
+     * 
+     * @return self
+     */
     public static function getInstance(): DataBase {
         if(!self::$instance) {
             self::$instance = new DataBase();
@@ -17,6 +22,11 @@ class DataBase {
         return self::$instance;
     }
 
+    /**
+     * Connect to database
+     * 
+     * @return void
+     */
     private function connect(): void {
         global $config;
         $db = isset($config['db']) ? $config['db'] : null;
@@ -24,6 +34,14 @@ class DataBase {
         $this->connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     }
 
+    /**
+     * Run query
+     * 
+     * @param string    $sql
+     * @param array     $data
+     * 
+     * @return array|null query result
+     */
     private function dispatch(string $sql, array $data = null): ?array {
         $statement = $this->connection->prepare($sql);
         $statement->execute($data);
@@ -33,6 +51,18 @@ class DataBase {
         }
     }
 
+    /**
+     * Get data from database
+     * 
+     * @param string        $table      query table
+     * @param string        $fields     query fields
+     * @param array|null    $condition  query conditions (optional)
+     * @param string|null   $filter     query filter (optional)
+     * @param string|null   $order      query order (optional)
+     * @param string|null   $limit      query limit (optional)
+     * 
+     * @return array|null query result
+     */
     public function getList(string $table, string $fields, array $condition = null, string $filter = null, string $order = null, string $limit = null): ?array {
         $query = "SELECT $fields FROM $table";
 
@@ -58,6 +88,14 @@ class DataBase {
         return $this->dispatch($query);
     }
 
+    /**
+     * Insert data on database
+     * 
+     * @param string    $table  Table that will store data
+     * @param array     $data   Data to be stored
+     * 
+     * @return bool query result
+     */
     public function insert(string $table, array $data): bool {
         foreach($data as $column => $value) {
             $columns[] = $column;
@@ -75,6 +113,15 @@ class DataBase {
         return true;
     }
 
+    /**
+     * Update data on database
+     * 
+     * @param string    $table      Table that will update data
+     * @param array     $data       Data to be updated
+     * @param array     $condition  Conditions to update register
+     * 
+     * @return bool query result
+     */
     public function update(string $table, array $data, array $condition): bool {
         foreach($data as $column => $value) {
             $updatesColumns[] = "$column = :$column";
@@ -96,6 +143,14 @@ class DataBase {
         return true;
     }
 
+    /**
+     * Delete data on database
+     * 
+     * @param string    $table      Table that will delete data
+     * @param array     $condition  Conditions to delete register
+     * 
+     * @return bool query result
+     */
     public function delete(string $table, array $condition): bool {
         foreach($condition as $column => $value) {
             $conditions[] = "$column = $value";
