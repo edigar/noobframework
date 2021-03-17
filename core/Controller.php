@@ -3,29 +3,12 @@
 namespace Core;
 
 class Controller {
-
-    /**
-     * Get configs (one or all) on cofig/cofig.php
-     * 
-     * @param string $item Config index wanted (optional)
-     * 
-     * @return mixed Value of config
-     */
-    protected function getConfig(string $item = null): mixed {
-        global $config;
-
-        if($item != null) {
-            return $config[$item];
-        }
-
-        return $config;
-    }
     
     /**
      * Load view
      * 
-     * @param string    $name   View name
-     * @param array     $params Params for view (optional)
+     * @param string        $name   View name
+     * @param array|null    $params Params for view (optional)
      * 
      * @return string view
      */
@@ -53,12 +36,13 @@ class Controller {
      * Redirects to provided url
      * 
      * @param string    $url
-     * @param array     $statusCode Redirect status code (optional)
+     * @param int|null  $statusCode Redirect status code (optional)
      * 
      * @return void
      */
     protected function redirect(string $url, int $statusCode = null): void {
-        $urlBase = $this->getConfig('urlBase') == null ? "" : $this->getConfig('urlBase') . "/";
+        $urlBase = config('urlBase');
+        $urlBase = $urlBase == null ? "" : $urlBase . "/";
 
         if($statusCode == null) {
             header('Location: ' . $urlBase . $url);

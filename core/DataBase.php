@@ -6,8 +6,22 @@ use PDO;
 use PDOException;
 
 class DataBase {
+
+    /** @var DataBase */
     private static $instance;
+
+    /** @var PDO|null */
     private $connection;
+
+    /**
+     * Doesn't allow multiple instances (final)
+     */
+    final private function __construct() {}
+
+    /**
+     * Doesn't allow cloning of instances (final)
+     */
+    final private function __clone() {}
 
     /**
      * Get an instance of DataBase (Singleton)
@@ -28,8 +42,7 @@ class DataBase {
      * @return void
      */
     private function connect(): void {
-        global $config;
-        $db = isset($config['db']) ? $config['db'] : null;
+        $db = config('db');
         $this->connection = new PDO("{$db['driver']}:host={$db['host']};dbname={$db['dbname']};charset=utf8", $db['user'], $db['pass'], [PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"]);
         $this->connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     }
@@ -37,12 +50,12 @@ class DataBase {
     /**
      * Run query
      * 
-     * @param string    $sql
-     * @param array     $data
+     * @param string        $sql
+     * @param array|null    $data
      * 
-     * @return array|null query result
+     * @return array|void query result
      */
-    private function dispatch(string $sql, array $data = null): ?array {
+    private function dispatch(string $sql, array $data = null) {
         $statement = $this->connection->prepare($sql);
         $statement->execute($data);
 

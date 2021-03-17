@@ -82,7 +82,7 @@ class Request {
      * @return mixed Get params
      */
     public function get() {
-        return $this->params['get'];
+        return isset($this->params['get']) ? $this->params['get'] : null;
     }
 
     /**

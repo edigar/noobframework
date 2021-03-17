@@ -4,7 +4,10 @@ namespace Core;
 
 class Session {
 
+    /** @var Session */
     private static $instance;
+
+    /** @var int|null  */
     private $session_expire_time = null ;
 
     /**
@@ -23,7 +26,7 @@ class Session {
         
         session_regenerate_id();
 
-        if(!is_null( $this->session_expire_time)) {
+        if(!is_null($this->session_expire_time)) {
             if(isset($_SESSION['SS_ULTIMA_ATIVIDADE']) && (time() - $_SESSION['SS_ULTIMA_ATIVIDADE'] > $this->session_expire_time ) ) {
                 $this->destroy();
             }
