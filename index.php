@@ -1,8 +1,7 @@
 <?php
 
-$config = file_exists('config/config.php') ? include_once 'config/config.php' : [];
-
-require('load.php');
+require __DIR__ . '/core/support/config.php';
+require __DIR__ . '/load.php';
 
 $_GET['key'] = (isset($_GET['key']) ? $_GET['key'] . '/' : 'index/');
 $key = $_GET['key'];
@@ -13,8 +12,8 @@ $param = isset($separator[2]) && !empty($separator[2]) ? $separator[2] : null;
 
 $app = new $controller;
 
-if($_SERVER['REQUEST_METHOD'] == 'POST') $param = [$param, $_POST];
-else $param = $param == null ? null : [$param];
+if($_SERVER['REQUEST_METHOD'] == 'POST') $param = ['get' => $param, 'post' => filter_input_array(INPUT_POST, FILTER_SANITIZE_SPECIAL_CHARS)];
+else $param = $param == null ? [] : ['get' => $param];
 
 if(!method_exists($app, $action)) loadNotFound();
 spl_autoload_unregister('loadNotFound');

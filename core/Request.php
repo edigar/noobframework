@@ -4,9 +4,10 @@ namespace Core;
 
 class Request {
 
+    /** @var array */
     private $params;
 
-    public function __construct(array $params = null) {
+    public function __construct(array $params) {
         $this->params = $params;
     }
 
@@ -45,7 +46,7 @@ class Request {
      * @return string ip
      */
     public function ip(): string {
-        return isset($_SERVER['HTTP_CLIENT_IP']) ? $_SERVER['HTTP_CLIENT_IP'] : isset($_SERVER['HTTP_X_FORWARDED_FOR']) ? $_SERVER['HTTP_X_FORWARDED_FOR'] : $_SERVER['REMOTE_ADDR'];
+        return isset($_SERVER['HTTP_CLIENT_IP']) ? $_SERVER['HTTP_CLIENT_IP'] : (isset($_SERVER['HTTP_X_FORWARDED_FOR']) ? $_SERVER['HTTP_X_FORWARDED_FOR'] : $_SERVER['REMOTE_ADDR']);
     }
 
     /**
@@ -81,7 +82,7 @@ class Request {
      * @return mixed Get params
      */
     public function get() {
-        return $this->params[0];
+        return $this->params['get'];
     }
 
     /**
@@ -94,8 +95,8 @@ class Request {
      */
     public function post(string $inputName = null, $default = null) {
         if($this->isMethod('POST')) {
-            if($inputName !== null) return isset($this->params[1][$inputName]) ? $this->params[1][$inputName] : $default;
-            else return isset($this->params[1]) ? $this->params[1] : null;
+            if($inputName !== null) return isset($this->params['post'][$inputName]) ? $this->params['post'][$inputName] : $default;
+            else return isset($this->params['post']) ? $this->params['post'] : null;
         }
 
         return $default;
