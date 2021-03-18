@@ -38,6 +38,12 @@ docker run -d --name noobframework -p 80:80 -v $(pwd):/var/www/html noobframewor
 
 ## How to use
 
+If you use the built-in PHP server on local development, start it with `router.php` as the input file, to effective route rewrite. Below is an example of the command. Run at the root of the project.
+
+```bash
+php -S localhost:8080 router.php
+```
+
 Develop your app inside the `app` folder, which is divided into Controllers, Models and views folders, and the public folder will be your public-facing document root.
 
 In the config folder you can add your application's settings, such as database and base url. Rename config.php.dist to config.php.
