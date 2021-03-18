@@ -13,7 +13,7 @@ function config(string $item = null) {
     global $config;
 
     if($item != null) {
-        return $config[$item];
+        return isset($config[$item]) ? $config[$item] : null;
     }
 
     return $config;
