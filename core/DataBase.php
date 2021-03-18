@@ -19,9 +19,9 @@ class DataBase {
     final private function __construct() {}
 
     /**
-     * Doesn't allow cloning of instances (final)
+     * Doesn't allow cloning of instances
      */
-    final private function __clone() {}
+    private function __clone() {}
 
     /**
      * Get an instance of DataBase (Singleton)
