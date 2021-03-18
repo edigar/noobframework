@@ -55,13 +55,15 @@ class DataBase {
      * 
      * @return array|void query result
      */
-    private function dispatch(string $sql, array $data = null) {
+    private function dispatch(string $sql, array $data = null): ?array {
         $statement = $this->connection->prepare($sql);
         $statement->execute($data);
 
         if(explode(" ", $sql)[0] == 'SELECT') {
             return $statement->fetchAll(PDO::FETCH_ASSOC);
         }
+        
+        return null;
     }
 
     /**
