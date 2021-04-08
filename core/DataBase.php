@@ -83,7 +83,7 @@ class DataBase {
 
         if($condition != null) {
             foreach($condition as $column => $value) {
-                $conditions[] = "$column = $value";
+                $conditions[] = "$column = '$value'";
             }
             $conditions = implode(' AND ', $conditions);    
         }
