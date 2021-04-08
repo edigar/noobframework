@@ -12,8 +12,12 @@ $param = isset($separator[2]) && !empty($separator[2]) ? $separator[2] : null;
 
 $app = new $controller;
 
-if($_SERVER['REQUEST_METHOD'] == 'POST') $param = ['get' => $param, 'post' => filter_input_array(INPUT_POST, FILTER_SANITIZE_SPECIAL_CHARS)];
-else $param = $param == null ? [] : ['get' => $param];
+if($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $param = ['get' => $param, 'post' => filter_input_array(INPUT_POST, FILTER_SANITIZE_SPECIAL_CHARS)];
+}
+else {
+    $param = $param == null ? [] : ['get' => $param];
+}
 
 if(!method_exists($app, $action)) loadNotFound();
 spl_autoload_unregister('loadNotFound');
