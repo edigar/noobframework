@@ -146,6 +146,7 @@ class DataBase {
 
         foreach($condition as $column => $value) {
             $conditions[] = "$column = :$column";
+            $conditions[":$column"] = $value;
         }
         $conditions = implode(' AND ', $conditions);
 
