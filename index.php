@@ -14,8 +14,7 @@ $app = new $controller;
 
 if($_SERVER['REQUEST_METHOD'] == 'POST') {
     $param = ['get' => $param, 'post' => filter_input_array(INPUT_POST, FILTER_SANITIZE_SPECIAL_CHARS)];
-}
-else {
+} else {
     $param = $param == null ? [] : ['get' => $param];
 }
 
