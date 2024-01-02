@@ -1,2 +1,5 @@
 config/config.php
 .vscode
+composer.lock
+.idea
+/vendor/

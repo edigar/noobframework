@@ -5,13 +5,13 @@ namespace Core;
 class Session {
 
     /** @var Session */
-    private static $instance;
+    private static Session $instance;
 
     /** @var int|null  */
-    private $session_expire_time = null ;
+    private int|null $session_expire_time = null ;
 
     /**
-     * @param int|null $expire_time Tempo máximo para expiração da sessão
+     * @param int|null $expire_time Session expire time
      */
     public function __construct(int $expire_time = null) {
         self::$instance = &$this;
@@ -27,12 +27,12 @@ class Session {
         session_regenerate_id();
 
         if(!is_null($this->session_expire_time)) {
-            if(isset($_SESSION['SS_ULTIMA_ATIVIDADE']) && (time() - $_SESSION['SS_ULTIMA_ATIVIDADE'] > $this->session_expire_time ) ) {
+            if(isset($_SESSION['SS_LAST_ACTIVITY']) && (time() - $_SESSION['SS_LAST_ACTIVITY'] > $this->session_expire_time ) ) {
                 $this->destroy();
             }
         }
 
-        $_SESSION['SS_ULTIMA_ATIVIDADE'] = time();
+        $_SESSION['SS_LAST_ACTIVITY'] = time();
     }
 
     /**
@@ -96,7 +96,7 @@ class Session {
      * 
      * @return void
      */
-    public function del(string $name): void {
+    public function delete(string $name): void {
         unset($_SESSION[trim($name)]);
     }
 

@@ -5,7 +5,7 @@ namespace Core;
 class Request {
 
     /** @var array */
-    private $params;
+    private array $params;
 
     public function __construct(array $params) {
         $this->params = $params;
@@ -34,7 +34,7 @@ class Request {
      * 
      * @param string $type Request method to be checked
      * 
-     * @return bool Whether or not the method is specified
+     * @return bool Whether the method is specified
      */
     public function isMethod(string $type): bool {
         return $this->method() === strtoupper($type);
@@ -46,7 +46,7 @@ class Request {
      * @return string ip
      */
     public function ip(): string {
-        return isset($_SERVER['HTTP_CLIENT_IP']) ? $_SERVER['HTTP_CLIENT_IP'] : (isset($_SERVER['HTTP_X_FORWARDED_FOR']) ? $_SERVER['HTTP_X_FORWARDED_FOR'] : $_SERVER['REMOTE_ADDR']);
+        return $_SERVER['HTTP_CLIENT_IP'] ?? ($_SERVER['HTTP_X_FORWARDED_FOR'] ?? $_SERVER['REMOTE_ADDR']);
     }
 
     /**
@@ -77,26 +77,37 @@ class Request {
     }
 
     /**
-     * Get params from GET method
-     * 
-     * @return mixed Get params
+     * Get params from URI
+     *
+     * @return mixed|null Get params
      */
-    public function get() {
-        return isset($this->params['get']) ? $this->params['get'] : null;
+    public function var(string $inputName = null): mixed {
+        if($inputName !== null) return $this->params['var'][$inputName] ?? null;
+        else return $this->params['var'] ?? null;
     }
 
     /**
-     * Get params (one or all) from POST method
+     * Get params from querystring
      * 
-     * @param string    $inputName  An especific parameter (optional)
-     * @param mixed     $default    If parameter not found, this will be returned (optional)
-     * 
+     * @return mixed|null Get params
+     */
+    public function query(string $inputName = null): mixed {
+        if($inputName !== null) return $this->params['query'][$inputName] ?? null;
+        else return $this->params['query'] ?? null;
+    }
+
+    /**
+     * Get params from body
+     *
+     * @param string|null   $inputName parameter name (optional)
+     * @param mixed|null    $default If parameter not found, this will be returned (optional)
+     *
      * @return mixed Post params
      */
-    public function post(string $inputName = null, $default = null) {
-        if($this->isMethod('POST')) {
-            if($inputName !== null) return isset($this->params['post'][$inputName]) ? $this->params['post'][$inputName] : $default;
-            else return isset($this->params['post']) ? $this->params['post'] : null;
+    public function body(string $inputName = null, mixed $default = null): mixed {
+        if($this->isMethod('POST') || $this->isMethod('PATCH') || $this->isMethod('PUT')) {
+            if($inputName !== null) return $this->params['body'][$inputName] ?? $default;
+            else return $this->params['body'] ?? null;
         }
 
         return $default;

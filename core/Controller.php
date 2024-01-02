@@ -2,20 +2,23 @@
 
 namespace Core;
 
+use Exception;
+
 class Controller {
-    
+
     /**
      * Load view
-     * 
-     * @param string        $name   View name
-     * @param array|null    $params Params for view (optional)
-     * 
+     *
+     * @param string $name View name
+     * @param array|null $params Params for view (optional)
+     *
      * @return string view
+     * @throws Exception view not found
      */
     protected function view(string $name, array $params = null): string {
         if ($params) {
             $arrKeys = array_keys($params);
-    
+
             foreach($arrKeys as $value) {
                 $$value = $params[$value];
             }
@@ -23,13 +26,13 @@ class Controller {
 
         $extensionsAllowed = ['.html', '.php', '.phtml'];
         foreach($extensionsAllowed as $extension) {
-            $view = 'App/views/' . $name . $extension;
+            $view = 'app/views/' . $name . $extension;
             if(file_exists($view)) {
                 return require_once($view);
             }
         }
 
-        throw new \Exception('view not found');
+        throw new Exception('view not found');
     }
 
      /**

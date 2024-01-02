@@ -8,10 +8,10 @@ use PDOException;
 class DataBase {
 
     /** @var DataBase */
-    private static $instance;
+    private static DataBase $instance;
 
     /** @var PDO|null */
-    private $connection;
+    private PDO|null $connection;
 
     /**
      * Doesn't allow multiple instances (final)
