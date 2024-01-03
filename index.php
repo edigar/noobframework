@@ -4,7 +4,7 @@ declare(strict_types=1);
 ob_start();
 
 require __DIR__ . "/vendor/autoload.php";
-require __DIR__ . '/core/support/config.php';
+require __DIR__ . "/core/support/config.php";
 require __DIR__ . "/route/router.php";
 
 $dispatcher = FastRoute\simpleDispatcher('routes');
@@ -38,47 +38,17 @@ switch ($routeInfo[0]) {
 
         $app = new $handler[0];
 
+        $param = [
+            'var' => $vars,
+            'query' => filter_input_array(INPUT_GET, FILTER_SANITIZE_SPECIAL_CHARS)
+        ];
+
         if($httpMethod == 'POST' || $httpMethod == 'PUT' || $httpMethod == 'PATCH') {
-            $param = [
-                'var' => $vars,
-                'query' => filter_input_array(INPUT_GET, FILTER_SANITIZE_SPECIAL_CHARS),
-                'body' => filter_input_array(INPUT_POST, FILTER_SANITIZE_SPECIAL_CHARS)
-            ];
-        } else {
-            $param = [
-                'var' => $vars,
-                'query' => filter_input_array(INPUT_POST, FILTER_SANITIZE_SPECIAL_CHARS)
-            ];
+            $param['body'] = filter_input_array(INPUT_POST, FILTER_SANITIZE_SPECIAL_CHARS);
         }
 
         $app->$method(new Core\Request($param));
-
         break;
 }
 
 ob_end_flush();
-
-
-//NoobFramework ANTIGO:
-//require __DIR__ . '/Core/support/config.php';
-//require __DIR__ . '/load.php';
-//
-//$_GET['key'] = (isset($_GET['key']) ? $_GET['key'] . '/' : 'index/');
-//$key = $_GET['key'];
-//$separator = explode('/', $key);
-//$controller = '\app\Controllers\\' . $separator[0] . "Controller";
-//$action = ($separator[1] == null ? 'index' : $separator[1]);
-//$param = isset($separator[2]) && !empty($separator[2]) ? $separator[2] : null;
-//
-//$app = new $controller;
-//
-//if($_SERVER['REQUEST_METHOD'] == 'POST') {
-//    $param = ['get' => $param, 'post' => filter_input_array(INPUT_POST, FILTER_SANITIZE_SPECIAL_CHARS)];
-//} else {
-//    $param = $param == null ? [] : ['get' => $param];
-//}
-//
-//if(!method_exists($app, $action)) loadNotFound();
-//spl_autoload_unregister('loadNotFound');
-//
-//$app->$action(new \Core\Request($param));
