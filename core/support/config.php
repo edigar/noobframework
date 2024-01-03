@@ -9,7 +9,7 @@ $config = file_exists('config/config.php') && is_file('config/config.php') ? inc
  *
  * @return mixed Value of config
  */
-function config(string $item = null) {
+function config(string $item = null): mixed {
     global $config;
 
     if($item != null) {
