@@ -1,0 +1,25 @@
+## Description
+Concisely and clearly describe the purpose of this pull request. Explain what problem it solves or what feature it adds.
+
+## Checklist
+Check or add the boxes that apply to this pull request:
+- [ ] Documentation has been updated.
+- [ ] All merge conflicts have been resolved.
+- [ ] The pull request is targeted to the correct branch.
+
+## Related Issue (Optional)
+If there is a related issue or task, mention it here, e.g., "Resolves #123" or "Closes #456."
+
+## Proposed Changes
+Describe in detail the changes that have been made. Include a list of all major code modifications, additions, or deletions.
+
+- [ ] Task 1:
+  - [ ] Task 1.1;
+  - [ ] Task 1.2;
+- [ ] Task 2.
+
+## Tests Performed
+Describe the tests that have been conducted to verify the functionality of the changes. Include the commands used and the results obtained.
+
+## Additional Notes
+Provide any additional information that you deem relevant for the review.
