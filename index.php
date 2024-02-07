@@ -47,6 +47,9 @@ switch ($routeInfo[0]) {
             $param['body'] = filter_input_array(INPUT_POST, FILTER_SANITIZE_SPECIAL_CHARS);
         }
 
+        $dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
+        $dotenv->load();
+
         $app->$method(new Core\Request($param));
         break;
 }

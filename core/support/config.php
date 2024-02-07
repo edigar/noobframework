@@ -1,20 +1,13 @@
 <?php
 
-$config = file_exists('config/config.php') && is_file('config/config.php') ? include_once 'config/config.php' : [];
-
 /**
- * Get configs (one or all) on config/config.php
+ * Get environment variable value
  *
- * @param string|null $item Config index wanted (optional)
+ * @param string|null $item config item wanted (optional)
+ * @param mixed $default default value if item isn't set (optional)
  *
  * @return mixed Value of config
  */
-function config(string $item = null): mixed {
-    global $config;
-
-    if($item != null) {
-        return isset($config[$item]) ? $config[$item] : null;
-    }
-
-    return $config;
+function config(string $item = null, mixed $default = null): mixed {
+    return $_ENV[$item] ?? $default;
 }
