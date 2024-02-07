@@ -43,11 +43,11 @@ class DataBase {
      */
     private function connect(): void {
         $db = [
-            'driver' => getenv('DRIVER'),
-            'host' => getenv('HOST'),
-            'dbname' => getenv('DBNAME'),
-            'user' => getenv('DBUSER'),
-            'pass' => getenv('DBPASSWORD'),
+            'driver' => config('DRIVER'),
+            'host' => config('HOST'),
+            'dbname' => config('DBNAME'),
+            'user' => config('DBUSER'),
+            'pass' => config('DBPASSWORD'),
         ];
         $this->connection = new PDO("{$db['driver']}:host={$db['host']};dbname={$db['dbname']};charset=utf8", $db['user'], $db['pass'], [PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"]);
         $this->connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
