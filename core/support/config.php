@@ -1,11 +1,11 @@
 <?php
 
-$config = file_exists('config/config.php') && is_file('config/config.php') ? include_once 'config/config.php' : [];
+$config = file_exists('config/config.php') && is_file('config/config.php') ? include_once 'config/AppConfig.php' : [];
 
 /**
  * Get configs (one or all) on config/config.php
  *
- * @param string|null $item Config index wanted (optional)
+ * @param string|null $item AppConfig index wanted (optional)
  *
  * @return mixed Value of config
  */

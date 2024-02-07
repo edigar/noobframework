@@ -5,6 +5,7 @@ ob_start();
 
 require __DIR__ . "/vendor/autoload.php";
 require __DIR__ . "/core/support/config.php";
+require __DIR__ . "/config/AppConfig.php";
 require __DIR__ . "/route/router.php";
 
 $dispatcher = FastRoute\simpleDispatcher('routes');
@@ -46,6 +47,9 @@ switch ($routeInfo[0]) {
         if($httpMethod == 'POST' || $httpMethod == 'PUT' || $httpMethod == 'PATCH') {
             $param['body'] = filter_input_array(INPUT_POST, FILTER_SANITIZE_SPECIAL_CHARS);
         }
+
+        $config = new config\AppConfig();
+        $config->load();
 
         $app->$method(new Core\Request($param));
         break;
