@@ -10,7 +10,7 @@ MVC stands for [Model-View-Controller](https://en.wikipedia.org/wiki/Model%E2%80
 - View: Represents the user interface layer, responsible solely for presenting data to the user. 
 - Controller: Acts as an intermediary between the user and the application's logic. It receives user input, determines which model to interact with, and selects the appropriate view to render. Controllers contain methods known as actions.
 
-## Requiriments
+## Requirements
 
 * PHP >= 7.1
 * apache with Rewrite mode enabled
