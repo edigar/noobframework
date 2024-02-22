@@ -8,6 +8,7 @@
  *
  * @return mixed Value of config
  */
-function config(string $item, mixed $default = null): mixed {
+function config(string $item, mixed $default = null): mixed
+{
     return $_ENV[$item] ?? $default;
 }
