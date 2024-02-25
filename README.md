@@ -12,9 +12,8 @@ MVC stands for [Model-View-Controller](https://en.wikipedia.org/wiki/Model%E2%80
 
 ## Requirements
 
-* PHP >= 7.1
-* Composer 2.6.5
-* apache with Rewrite mode enabled
+* [PHP >= 7.1](https://www.php.net/downloads.php)
+* [Composer](https://getcomposer.org)
 
 ## Installation
 
