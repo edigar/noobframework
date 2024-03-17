@@ -54,4 +54,4 @@ docker run -d --name noobframework -p 80:80 -v $(pwd):/var/www/html noobframewor
 5. To create a controller, add a new file inside `app/Controller`, similar to existing controllers (e.g., indexController.php). Similarly, add your models inside the Models folder and create views following the examples provided in the views folder.
 6. Each controller can contain multiple actions (methods) corresponding to different user interactions.
 
-For more, see [documentation](https://edigar.github.io/noobframework).
+For more, see [documentation](https://edigar.github.io/noobframework-doc).
