@@ -12,7 +12,7 @@ MVC stands for [Model-View-Controller](https://en.wikipedia.org/wiki/Model%E2%80
 
 ## Requirements
 
-* [PHP >= 7.1](https://www.php.net/downloads.php)
+* [PHP >= 8.3](https://www.php.net/downloads.php)
 * [Composer](https://getcomposer.org)
 
 ## Installation
