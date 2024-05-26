@@ -268,6 +268,8 @@ class Cookie
         $copiedCookie = clone $this;
         // set the copied cookie's value to an empty string which internally sets the required options for a deletion
         $copiedCookie->setValue('');
+        // set the copied cookie's value to 1 hour ago to clear the cookie on the client side
+        $copiedCookie->setExpiryTime(time() - 3600);
 
         // save the copied "deletion" cookie
         return $copiedCookie->save();
