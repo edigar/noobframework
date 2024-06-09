@@ -5,13 +5,13 @@ namespace Core;
 class Cookie
 {
     /** @var string name prefix indicating that the cookie must be from a secure origin (i.e. HTTPS) and the 'secure' attribute must be set */
-    const PREFIX_SECURE = '__Secure-';
+    const string PREFIX_SECURE = '__Secure-';
     /** @var string name prefix indicating that the 'domain' attribute must *not* be set, the 'path' attribute must be '/' and the effects of {@see PREFIX_SECURE} apply as well */
-    const PREFIX_HOST = '__Host-';
-    const HEADER_PREFIX = 'Set-Cookie: ';
-    const SAME_SITE_RESTRICTION_NONE = 'None';
-    const SAME_SITE_RESTRICTION_LAX = 'Lax';
-    const SAME_SITE_RESTRICTION_STRICT = 'Strict';
+    const string PREFIX_HOST = '__Host-';
+    const string HEADER_PREFIX = 'Set-Cookie: ';
+    const string SAME_SITE_RESTRICTION_NONE = 'None';
+    const string SAME_SITE_RESTRICTION_LAX = 'Lax';
+    const string SAME_SITE_RESTRICTION_STRICT = 'Strict';
 
     /** The name of the cookie which is also the key for future accesses via `$_COOKIE[...]` */
     private string $name;
