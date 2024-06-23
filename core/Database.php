@@ -5,12 +5,10 @@ namespace Core;
 use PDO;
 use PDOException;
 
-class DataBase {
+class Database {
 
-    /** @var DataBase */
-    private static DataBase $instance;
+    private static Database $instance;
 
-    /** @var PDO|null */
     private PDO|null $connection;
 
     /**
@@ -24,20 +22,20 @@ class DataBase {
     private function __clone() {}
 
     /**
-     * Get an instance of DataBase (Singleton)
+     * Get an instance of Database (Singleton)
      * 
      * @return self
      */
-    public static function getInstance(): DataBase {
-        if(!self::$instance) {
-            self::$instance = new DataBase();
+    public static function getInstance(): Database {
+        if(!isset(self::$instance)) {
+            self::$instance = new Database();
             self::$instance->connect();
         }
         return self::$instance;
     }
 
     /**
-     * Connect to database
+     * Connect to Database
      * 
      * @return void
      */
@@ -56,12 +54,12 @@ class DataBase {
     /**
      * Run query
      * 
-     * @param string        $sql
-     * @param array|null    $data
+     * @param string $sql
+     * @param ?array $data
      * 
-     * @return array|void query result
+     * @return ?array query result
      */
-    private function dispatch(string $sql, array $data = null): ?array {
+    private function dispatch(string $sql, ?array $data = null): ?array {
         $statement = $this->connection->prepare($sql);
         $statement->execute($data);
 
@@ -75,16 +73,16 @@ class DataBase {
     /**
      * Get data from database
      * 
-     * @param string        $table      query table
-     * @param string        $fields     query fields
-     * @param array|null    $condition  query conditions (optional)
-     * @param string|null   $filter     query filter (optional)
-     * @param string|null   $order      query order (optional)
-     * @param string|null   $limit      query limit (optional)
+     * @param string    $table      query table
+     * @param string    $fields     query fields
+     * @param ?array    $condition  query conditions (optional)
+     * @param ?string   $filter     query filter (optional)
+     * @param ?string   $order      query order (optional)
+     * @param ?string   $limit      query limit (optional)
      * 
      * @return array|null query result
      */
-    public function getList(string $table, string $fields, array $condition = null, string $filter = null, string $order = null, string $limit = null): ?array {
+    public function getList(string $table, string $fields, ?array $condition = null, ?string $filter = null, ?string $order = null, ?string $limit = null): ?array {
         $query = "SELECT $fields FROM $table";
 
         if($condition != null) {
