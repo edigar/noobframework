@@ -9,13 +9,13 @@ class Controller {
     /**
      * Load view
      *
-     * @param string $name View name
-     * @param array|null $params Params for view (optional)
+     * @param string $name view name
+     * @param ?array $params params for view (optional)
      *
-     * @return string view
      * @throws Exception view not found
      */
-    protected function view(string $name, array $params = null): string {
+    protected function view(string $name, ?array $params = null): string
+    {
         if ($params) {
             $arrKeys = array_keys($params);
 
@@ -35,15 +35,14 @@ class Controller {
         throw new Exception('view not found');
     }
 
-     /**
+    /**
      * Redirects to provided url
-     * 
-     * @param string    $url
-     * @param int|null  $statusCode Redirect status code (optional)
-     * 
-     * @return void
+     *
+     * @param string $url URL to redirect
+     * @param ?int $statusCode redirect status code (optional)
      */
-    protected function redirect(string $url, int $statusCode = null): void {
+    protected function redirect(string $url, ?int $statusCode = null): void
+    {
         $urlBase = config('urlBase');
         $urlBase = $urlBase == null ? "" : $urlBase . "/";
 
