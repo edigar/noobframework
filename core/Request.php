@@ -4,10 +4,10 @@ namespace Core;
 
 class Request {
 
-    /** @var array */
     private array $params;
 
-    public function __construct(array $params) {
+    public function __construct(array $params)
+    {
         $this->params = $params;
     }
 
@@ -16,7 +16,8 @@ class Request {
      * 
      * @return array parameters
      */
-    public function getParams(): array {
+    public function getParams(): array
+    {
         return $this->params;
     }
 
@@ -25,7 +26,8 @@ class Request {
      * 
      * @return string method
      */
-    public function method(): string  {
+    public function method(): string
+    {
         return $_SERVER['REQUEST_METHOD'];
     }
 
@@ -36,7 +38,8 @@ class Request {
      * 
      * @return bool Whether the method is specified
      */
-    public function isMethod(string $type): bool {
+    public function isMethod(string $type): bool
+    {
         return $this->method() === strtoupper($type);
     }
 
@@ -45,7 +48,8 @@ class Request {
      * 
      * @return string ip
      */
-    public function ip(): string {
+    public function ip(): string
+    {
         return $_SERVER['HTTP_CLIENT_IP'] ?? ($_SERVER['HTTP_X_FORWARDED_FOR'] ?? $_SERVER['REMOTE_ADDR']);
     }
 
@@ -54,57 +58,69 @@ class Request {
      * 
      * @return string uri
      */
-    public function path(): string {
+    public function path(): string
+    {
         return $_SERVER['REQUEST_URI'];
     }
 
     /**
      * Request is using SSL?
      * 
-     * @return bool
+     * @return bool true if it is using SSL
      */
-    public function ssl(): bool{
+    public function ssl(): bool
+    {
         return !empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on';
     }
 
     /**
      * Get full path URL
      * 
-     * @return string URL
+     * @return string full path URL
      */
-    public function fullPath(): string {
+    public function fullPath(): string
+    {
         return (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
     }
 
     /**
      * Get params from URI
      *
-     * @return mixed|null Get params
+     * @param ?string $inputName parameter name (optional)
+     *
+     * @return mixed Get params
      */
-    public function var(string $inputName = null): mixed {
+    public function var(?string $inputName = null): mixed
+    {
         if($inputName !== null) return $this->params['var'][$inputName] ?? null;
-        else return $this->params['var'] ?? null;
+
+        return $this->params['var'] ?? null;
     }
 
     /**
      * Get params from querystring
+     *
+     * @param ?string $inputName parameter name (optional)
      * 
      * @return mixed|null Get params
      */
-    public function query(string $inputName = null): mixed {
+    public function query(?string $inputName = null): mixed
+    {
         if($inputName !== null) return $this->params['query'][$inputName] ?? null;
-        else return $this->params['query'] ?? null;
+
+        return $this->params['query'] ?? null;
     }
 
     /**
      * Get params from body
      *
-     * @param string|null   $inputName parameter name (optional)
-     * @param mixed|null    $default If parameter not found, this will be returned (optional)
+     * @param ?string   $inputName parameter name (optional)
+     * @param mixed     $default If parameter not found, this will be returned (optional)
      *
      * @return mixed Post params
      */
-    public function body(string $inputName = null, mixed $default = null): mixed {
+    public function body(?string $inputName = null, mixed $default = null): mixed
+    {
         if($this->isMethod('POST') || $this->isMethod('PATCH') || $this->isMethod('PUT')) {
             if($inputName !== null) return $this->params['body'][$inputName] ?? $default;
             else return $this->params['body'] ?? null;
