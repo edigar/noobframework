@@ -4,16 +4,15 @@ namespace Core;
 
 class Session {
 
-    /** @var Session */
     private static Session $instance;
 
-    /** @var int|null  */
-    private int|null $session_expire_time = null ;
+    private ?int $session_expire_time = null ;
 
     /**
-     * @param int|null $expire_time Session expire time
+     * @param ?int $expire_time Session expire time
      */
-    public function __construct(int $expire_time = null) {
+    public function __construct(?int $expire_time = null)
+    {
         self::$instance = &$this;
 
         $this->setExpiretime($expire_time);
@@ -38,11 +37,12 @@ class Session {
     /**
      * Get an instance of Session (Singleton)
      * 
-     * @param int|null $expire_time Session expire time
+     * @param ?int $expire_time Session expire time
      * 
      * @return self
      */
-    public static function getInstance(int $expire_time = null ): Session {
+    public static function getInstance(?int $expire_time = null ): Session
+    {
         if(!isset(self::$instance)) self::$instance = new self($expire_time);
 
         return self::$instance;
@@ -51,11 +51,12 @@ class Session {
     /**
      * Set session expire time
      * 
-     * @param int|null $__value Expire time
+     * @param ?int $__value Expire time
      * 
      * @return void
      */
-    public function setExpiretime(int $__value = null): void {
+    public function setExpiretime(?int $__value = null): void
+    {
         if($__value != null)
             $this->session_expire_time = $__value;
     }
@@ -65,28 +66,44 @@ class Session {
      * 
      * @return int
      */
-    public function getExpiretime(): int {
+    public function getExpiretime(): int
+    {
         return $this->session_expire_time ;
     }
 
-    public function __set(string $name, $value): void {
+    public function __set(string $name, $value): void
+    {
         $this->set($name, $value);
     }
 
-    public function __get(string $name) {
+    public function __get(string $name)
+    {
         return $this->get($name);
     }
 
-    public function set(string $__name, $__value): void {
+    /**
+     * Set a session item (variable)
+     *
+     * @param string $__name item name
+     * @param mixed $__value item value
+     */
+    public function set(string $__name, mixed $__value): void
+    {
         $_SESSION[trim($__name)] = $__value;
     }
 
-    public function get(string $__name = null) {
+    /**
+     * Get a session item (variable)
+     *
+     * @param ?string $__name item name
+     *
+     * @return mixed value of the item
+     */
+    public function get(?string $__name = null): mixed
+    {
         if($__name == null) return null;
-        if(isset($_SESSION[trim($__name)]))
-            return $_SESSION[trim($__name)];
-        else
-            return null;
+
+        return $_SESSION[trim($__name)] ?? null;
     }
 
     /**
@@ -96,7 +113,8 @@ class Session {
      * 
      * @return void
      */
-    public function delete(string $name): void {
+    public function delete(string $name): void
+    {
         unset($_SESSION[trim($name)]);
     }
 
@@ -105,8 +123,9 @@ class Session {
      * 
      * @return void
      */
-    function destroy(): void {
-        $_SESSION = array();
+    function destroy(): void
+    {
+        $_SESSION = [];
         session_destroy();
     }
 }
